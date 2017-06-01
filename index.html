@@ -15,37 +15,175 @@
             margin: 0 auto;
         }
 
-        .title {
-            font-size: 18px;
-            text-align: center;
-        }
+
         .sub-title {
             font-size: 14px;
             font-weight: 400;
+            margin-bottom: 40px;
         }
+
         .left, .middle, .right {
             width: 33.3%;
         }
+
         .inner-aqi-section {
-            width: 40%;
+            margin-bottom: 60px;
         }
 
         .aqi {
             position: relative;
+            margin: 80px 80px;
         }
 
         .pm {
             display: flex;
         }
 
-        .circle {
-            display: flex;
-            align-items: center;
-            width: 400px;
-            height: 400px;
-            border-radius: 200px;
-            border: 1px solid blue;
+        .pm .sub-title {
+            margin-bottom: 30px;
         }
+
+        .ppm .symbol {
+            font-size: 100px;
+            margin-right: 20px;
+            display: inline-block;
+        }
+
+        .ppm .figure {
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 20px;
+        }
+
+        .ppm .value, .ppm .unit {
+            font-size: 30px;
+        }
+
+        .ppm .value {
+            line-height: 50px;
+            text-align: center;
+            padding-bottom: 5px;
+            border-bottom: 1px solid white;
+        }
+
+        .ppm .unit {
+            line-height: 50px;
+            padding-top: 5px;
+
+        }
+
+        .ppm .left {
+            width: calc(50% - 70px);
+            display: inline-block;
+            margin-right: 70px;
+        }
+
+        .ppm .icon-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .ppm .icon {
+            width: 45px;
+            height: 45px;
+            border: 1px solid white;
+            margin: 0px 10px 10px 0px;
+
+        }
+
+        .ppm .icon:last-child {
+
+        }
+
+        .ppm table {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        th {
+            text-align: left;
+            border-bottom: 1px solid white;
+        }
+
+        td {
+            height: 30px;
+
+        }
+
+
+
+        tr td:first-child {
+            width: 160px;
+        }
+
+        tr td:last-child {
+            text-align: center;
+            width: 40px;
+        }
+
+
+        .middle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .title {
+            font-size: 18px;
+            text-align: center;
+        }
+        .description {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .circle {
+            /*position: relative;*/
+            width: 430px;
+            height: 430px;
+            border-radius: 215px;
+            border: 1px solid blue;
+            margin-bottom: 60px;
+        }
+
+        .circle .value-group {
+            display: flex;
+            height: 60%;
+        }
+
+        .circle .value {
+            font-size: 80px;
+            width: 50%;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .circle p {
+            padding: 40px 50px 0px 50px;
+            text-align: center;
+        }
+
+
+        .inner-outer {
+            width: 100%;
+            display: flex;
+            font-size: 12px;
+        }
+
+        .inner-outer .item {
+            margin-bottom: 14px;
+        }
+
+        .inner-outer .value {
+            margin-bottom: 24px;
+            font-size: 18px;
+        }
+        .inner, .outer {
+            width: 50%;
+            text-align: center;
+        }
+
         .background-border, .moving-line {
             z-index: 10;
         }
@@ -71,32 +209,49 @@
 <body>
 <section class="left">
     <section class="inner-aqi-section">
-        <div class="aqi">
-        </div>
         <div class="sub-title">室内空气质量指数（AQI）</div>
+        <div class="aqi"></div>
         <p>幼儿时期是孩子成长发育最快，精力最旺盛的时期，在孩子各项机能和系统还未发育完善的这个时期，孩子又最容易</p>
         <p>幼儿时期是孩子成长发育最快，精力最旺盛的时期，在孩子各项机能和系统还未发育完善的这个时期，孩子又最容易</p>
-
     </section>
 
     <section class="pm">
-        <div class="sub-title">可吸入颗粒物（PM10）</div>
-        <div class="sub-title">可吸入颗粒物（PM2.5）</div>
+        <div>
+            <div class="sub-title">可吸入颗粒物（PM10）</div>
+            <div class="value">室内 180g／m3</div>
+            <div></div>
+        </div>
+
+        <div>
+            <div class="sub-title">可吸入颗粒物（PM2.5）</div>
+            <div class="value">室内 180g／m3</div>
+            <div></div>
+        </div>
     </section>
 
     <section class="ppm">
         <div class="sub-title">纯水水质（PM10）</div>
-        <div>
-            <div>纯</div>
-            <div>20</div>
-            <div>TDS</div>
+        <div class="left">
+            <div class="symbol">纯</div>
+            <div class="figure">
+                <div class="value">20</div>
+                <div class="unit">TDS</div>
+            </div>
             <p>当前咱的是五级过滤，五个滤芯。基本都这样，有在后面加特殊要求的，比如加一个矿物质，当前咱的是五级过滤</p>
-            <div></div>
-            <div>水质软硬</div>
-            <div></div>
-            <div>水质纯度</div>
-            <div></div>
-            <div>水压状态</div>
+            <div class="icon-group">
+                <div class="item">
+                    <div class="icon"></div>
+                    <span class="metric">水质软硬</span>
+                </div>
+                <div class="item">
+                    <div class="icon"></div>
+                    <span class="metric">水质纯度</span>
+                </div>
+                <div class="item">
+                    <div class="icon"></div>
+                    <span class="metric">水压状态</span>
+                </div>
+            </div>
         </div>
         <table>
             <tr>
@@ -141,61 +296,130 @@
 </section>
 
 <section class="middle">
-    <section class="life-style-index">
-        <div class="aqi">
-        </div>
-        <div class="title">健康生活综合指数</div>
-        <div class="description">LIFE-STYLE INDEX</div>
-        <div class="circle">
-            <div>82</div>
-            <div>32</div>
-            <p>当前咱的是五级过滤，五个滤芯。基本都这样，有在后面加特殊要求的，比如加一个矿物质，当前咱的是五级过滤</p>
-        </div>
-    </section>
+    <div class="title">健康生活综合指数</div>
+    <div class="description">LIFE-STYLE INDEX</div>
 
-    <section class="pm">
-        <div>室内温度
+    <div class="circle">
+        <div class="value-group">
+            <div class="value">82</div>
+            <div class="value">32</div>
         </div>
-        <div>室内湿度</div>
-        <div>室内日照</div>
-        <div>室内噪声</div>
-    </section>
+        <p>当前咱的是五级过滤，五个滤芯。基本都这样，有在后面加特殊要求的，比如加一个矿物质，当前咱的是五级过滤</p>
+    </div>
 
-    <section class="pm">
-        <div>室外温度</div>
-        <div>室外湿度</div>
-        <div>室外日照</div>
-        <div>室外噪声</div>
-    </section>
+    <div class="inner-outer">
+        <section class="inner">
+            <div class="item">室内温度</div>
+            <div class="value">32 | 64</div>
+            <div class="item">室内湿度</div>
+            <div class="value">23%</div>
+            <div class="item">室内日照</div>
+            <div class="value">6.4hrs</div>
+            <div class="item">室内噪声</div>
+            <div class="value">20db</div>
+        </section>
+
+        <section class="outer">
+            <div class="item">室外温度</div>
+            <div class="value">32 | 64</div>
+            <div class="item">室外湿度</div>
+            <div class="value">23%</div>
+            <div class="item">室外日照</div>
+            <div class="value">6.4hrs</div>
+            <div class="item">室外噪声</div>
+            <div class="value">20db</div>
+        </section>
+
+    </div>
 </section>
 
 <section class="right">
     <section class="inner-aqi-section">
-        <div class="aqi">
-        </div>
         <div class="sub-title">室内空气质量指数（AQI）</div>
+        <div class="aqi"></div>
         <p>幼儿时期是孩子成长发育最快，精力最旺盛的时期，在孩子各项机能和系统还未发育完善的这个时期，孩子又最容易</p>
         <p>幼儿时期是孩子成长发育最快，精力最旺盛的时期，在孩子各项机能和系统还未发育完善的这个时期，孩子又最容易</p>
-
     </section>
 
     <section class="pm">
-        <div class="pm-item">
+        <div>
             <div class="sub-title">可吸入颗粒物（PM10）</div>
-
+            <div class="value">室内 180g／m3</div>
+            <div></div>
         </div>
-        <div class="pm-item">
-            <div class="sub-title">可吸入颗粒物（PM2.5）</div>
 
+        <div>
+            <div class="sub-title">可吸入颗粒物（PM2.5）</div>
+            <div class="value">室内 180g／m3</div>
+            <div></div>
         </div>
     </section>
 
     <section class="ppm">
         <div class="sub-title">原水水质（PM10）</div>
-        <p>当前咱的是五级过滤，五个滤芯。基本都这样，有在后面加特殊要求的，比如加一个矿物质，当前咱的是五级过滤</p>
+        <div class="left">
+            <div class="symbol">浊</div>
+            <div class="figure">
+                <div class="value">200</div>
+                <div class="unit">TDS</div>
+            </div>
+            <p>当前咱的是五级过滤，五个滤芯。基本都这样，有在后面加特殊要求的，比如加一个矿物质，当前咱的是五级过滤</p>
+            <div class="icon-group">
+                <div class="item">
+                    <div class="icon"></div>
+                    <span class="metric">水质软硬</span>
+                </div>
+                <div class="item">
+                    <div class="icon"></div>
+                    <span class="metric">水质纯度</span>
+                </div>
+                <div class="item">
+                    <div class="icon"></div>
+                    <span class="metric">水压状态</span>
+                </div>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th>原水水质检查</th>
+                <th>实时数据</th>
+            </tr>
+            <tr>
+                <td>PH值</td>
+                <td>6.5</td>
+            </tr>
+            <tr>
+                <td>阴阳离子合成洗涤剂</td>
+                <td>6.5</td>
+            </tr>
+            <tr>
+                <td>溶解性总固体</td>
+                <td>6.5</td>
+            </tr>
+            <tr>
+                <td>硬度（CoCO3计）</td>
+                <td>6.5</td>
+            </tr>
+            <tr>
+                <td>氢化物</td>
+                <td>6.5</td>
+            </tr>
+            <tr>
+                <td>总有机碳</td>
+                <td>6.5</td>
+            </tr>
+            <tr>
+                <td>硫酸盐</td>
+                <td>6.5</td>
+            </tr>
+            <tr>
+                <td>挥发酚类</td>
+                <td>6.5</td>
+            </tr>
+
+        </table>
     </section>
 </section>
-
 
 
 <script type="text/javascript">
@@ -217,7 +441,6 @@
             .range([1057.83, 200]);
 
 
-
         var rectangle = svgContainer
             .attr({
                 "viewBox": "0 0 1057.83 296.42"
@@ -226,22 +449,17 @@
             .data(AOIValue)
             .enter()
             .append("rect")
-//            .attr({
-//
-//            })
             .style({
                 fill: "#212121"
             });
-//
+
         let movingLine = baseElement
             .append("svg")
             .attr("class", "moving-line")
             .attr({
                 "viewBox": "0 0 1057.83 296.42"
             });
-//
-//
-//
+
         movingLine.selectAll(".horizontal-line")
             .data(AOIValue)
             .enter()
@@ -311,7 +529,8 @@
                 "stroke-width": 2
             });
 
-    };
+    }
+    ;
     function updateAQI(AOIValue, baseElement) {
 
         let rectWidth = d3.scale.linear()
@@ -324,7 +543,7 @@
                 "width": function (d) {
                     return rectWidth(d);
                 },
-                height:"296.42"
+                height: "296.42"
             });
 
         let movingLineLength = d3.scale.linear()
