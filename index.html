@@ -26,17 +26,33 @@
             width: 33.3%;
         }
 
-        .inner-aqi-section {
+        .inner-aqi-section, .outer-aqi-section {
             margin-bottom: 60px;
         }
 
         .aqi {
             position: relative;
-            margin: 80px 80px;
+            margin: 80px 0px;
+        }
+
+        .aqi .text {
+            position: absolute;
+            top: 38px;
+            left: 20px;
+            color: white;
+            font-size: 20px;
+            z-index: 10;
         }
 
         .pm {
             display: flex;
+            margin-bottom: 40px;
+        }
+
+        .pm .left {
+            width: calc(50% - 70px);
+            /*display: inline-block;*/
+            margin-right: 70px;
         }
 
         .pm .sub-title {
@@ -216,13 +232,13 @@
     </section>
 
     <section class="pm">
-        <div>
+        <div class="left">
             <div class="sub-title">可吸入颗粒物（PM10）</div>
             <div class="value">室内 180g／m3</div>
             <div></div>
         </div>
 
-        <div>
+        <div class="right">
             <div class="sub-title">可吸入颗粒物（PM2.5）</div>
             <div class="value">室内 180g／m3</div>
             <div></div>
@@ -334,21 +350,21 @@
 </section>
 
 <section class="right">
-    <section class="inner-aqi-section">
-        <div class="sub-title">室内空气质量指数（AQI）</div>
+    <section class="outer-aqi-section">
+        <div class="sub-title">室外空气质量指数（AQI）</div>
         <div class="aqi"></div>
         <p>幼儿时期是孩子成长发育最快，精力最旺盛的时期，在孩子各项机能和系统还未发育完善的这个时期，孩子又最容易</p>
         <p>幼儿时期是孩子成长发育最快，精力最旺盛的时期，在孩子各项机能和系统还未发育完善的这个时期，孩子又最容易</p>
     </section>
 
     <section class="pm">
-        <div>
+        <div class="left">
             <div class="sub-title">可吸入颗粒物（PM10）</div>
             <div class="value">室内 180g／m3</div>
             <div></div>
         </div>
 
-        <div>
+        <div class="right">
             <div class="sub-title">可吸入颗粒物（PM2.5）</div>
             <div class="value">室内 180g／m3</div>
             <div></div>
@@ -424,27 +440,28 @@
 
 <script type="text/javascript">
     function renderAQI(AOIValue, baseElement) {
-
-
-
-        //Make an SVG Container
-        var svgContainer = baseElement
-            .append("svg")
+        //Draw value txt
+        baseElement
+            .selectAll("text")
+            .data(AOIValue)
+            .enter()
+            .append("span")
             .attr({
-                "class": "rect-container"
+                "class": "text"
+            })
+            .text(function (d) {
+                return d;
             });
 
         //Draw the Rectangle
-
-        let rectWidth = d3.scale.linear()
-            .domain([0, 2000])
-            .range([1057.83, 200]);
-
-
-        var rectangle = svgContainer
+        var rectContainer = baseElement
+            .append("svg")
             .attr({
-                "viewBox": "0 0 1057.83 296.42"
-            })
+                "class": "rect-container",
+                "viewBox": "0 0 1700 296.42"
+            });
+
+        var rectangle = rectContainer
             .selectAll("rect")
             .data(AOIValue)
             .enter()
@@ -455,9 +472,10 @@
 
         let movingLine = baseElement
             .append("svg")
-            .attr("class", "moving-line")
             .attr({
-                "viewBox": "0 0 1057.83 296.42"
+                "class": "moving-line",
+                "viewBox": "0 0 1700 296.42",
+                "transform": "translate(" + 0 + "," + 0 + ")"
             });
 
         movingLine.selectAll(".horizontal-line")
@@ -466,10 +484,8 @@
             .append("line")
             .attr({
                 "class": "horizontal-line",
+                "x1": 200,
                 "y1": 148.21,
-//                "x2": function (d) {
-//                    movingLineLength(d)
-//                },
                 "y2": 148.21
             })
             .style({
@@ -479,16 +495,13 @@
                 "stroke-width": 2
             });
 
-//
         movingLine.selectAll(".vertical-line")
             .data(AOIValue)
             .enter()
             .append("line")
             .attr({
                 "class": "vertical-line",
-//                "x1": 1056.83,
-//                "x2": 1056.83,
-                "y2": 296.42
+                "y2": 500,
             })
             .style({
                 "fill": "none",
@@ -496,14 +509,14 @@
                 "stroke-miterlimit": 10,
                 "stroke-width": 2
             });
-//
-//
-//
-//        //draw background
-//
+
+        //draw background line
         let background = baseElement
             .append("svg")
-            .attr("viewBox", "0 0 992.31 195.89")
+            .attr({
+                "viewBox": "0 0 1500 195.89",
+                "transform": "translate(" + 100 + "," + 12 + ")"
+            })
             .append("path")
             .attr({
                 "d": "M163.28,194.33l829-96.17-833-96.63C130.8-1.79,101.43.17,74.79,8.67,38.78,20.15,0,44.88,0,98.15c0,48.13,33.78,73,67.56,85.82C97.1,195.19,130.75,198.1,163.28,194.33Z"
@@ -512,12 +525,14 @@
             .style({
                 "fill": "#7ed1d2"
             });
-        //draw background line
 
-        let backgroundLine = baseElement
+        baseElement
             .append("svg")
-            .attr("class", "background-border")
-            .attr("viewBox", "0 0 1133.19 223.79")
+            .attr({
+                "class": "background-border",
+                "viewBox": "0 0 1700 223.79",
+                "transform": "translate(" + 100 + "," + 12 + ")"
+            })
             .append("path")
             .attr({
                 "d": "M185.87,221l938.64-108.89L181.35,2.72C149.09-1,115.84,1.19,85.67,10.81,44.9,23.82,1,51.82,1,112.13c0,54.49,38.25,82.64,76.49,97.16C110.93,222,149,225.29,185.87,221Z"
@@ -529,41 +544,46 @@
                 "stroke-width": 2
             });
 
-    }
-    ;
-    function updateAQI(AOIValue, baseElement) {
+    };
 
-        let rectWidth = d3.scale.linear()
+    function updateAQI(AOIValue, baseElement) {
+        baseElement
+            .selectAll(".text")
+            .data(AOIValue)
+            .text(function (d) {
+                return d;
+            });
+
+
+        let rectWidthFuc = d3.scale.linear()
             .domain([0, 2000])
-            .range([1057.83, 200]);
+            .range([1400, 300]);
 
         baseElement.selectAll("rect")
             .data(AOIValue)
             .attr({
                 "width": function (d) {
-                    return rectWidth(d);
+                    return rectWidthFuc(d);
                 },
                 height: "296.42"
             });
 
         let movingLineLength = d3.scale.linear()
             .domain([0, 2000])
-            .range([1057.83, 20]);
+            .range([1400, 300]);
 
 
         baseElement.selectAll(".horizontal-line")
             .data(AOIValue)
             .attr({
                 "class": "horizontal-line",
-//                "x1": 1056.83,
-                "y1": 148.21,
+                "x1": 200,
                 "x2": function (d) {
                     return movingLineLength(d)
                 },
-                "y2": 148.21
             });
 
-        movingLine.selectAll(".vertical-line")
+        baseElement.selectAll(".vertical-line")
             .data(AOIValue)
             .attr({
                 "class": "vertical-line",
@@ -573,7 +593,7 @@
                 "x2": function (d) {
                     return movingLineLength(d)
                 },
-                "y2": 296.42
+                "y2": 500
             })
             .style({
                 "fill": "none",
@@ -583,16 +603,20 @@
             });
     };
 
-    var data = [0];
     renderAQI([Math.round(Math.random() * 2000)], d3.select(".left .aqi"));
+    updateAQI([Math.round(Math.random() * 2000)], d3.select(".left .aqi"))
+
     setInterval(function () {
         updateAQI([Math.round(Math.random() * 2000)], d3.select(".left .aqi"))
     }, 3000);
 
     renderAQI([Math.round(Math.random() * 2000)], d3.select(".right .aqi"));
+    updateAQI([Math.round(Math.random() * 2000)], d3.select(".right .aqi"))
+
     setInterval(function () {
         updateAQI([Math.round(Math.random() * 2000)], d3.select(".right .aqi"))
     }, 3000);
+
 </script>
 
 </body>
