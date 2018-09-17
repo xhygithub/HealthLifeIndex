@@ -26,7 +26,7 @@ function updateAQI(AqiValue, baseElement) {
     baseElement.select(".horizontal-line")
         .attr({
             "class": "horizontal-line",
-            "x1": 150,
+            "x1": 158,
             "x2": movingLineLength(AqiValue),
         });
 
